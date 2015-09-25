@@ -2,6 +2,16 @@ doctype html
 html
   head
     title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
+    include stylesheets
+    block css
   body
-    block content
+    header
+      include nav
+    main
+      .container 
+        block content
+    footer.page-footer.indigo.darken-4
+      .footer-copyright
+        .container=(new Date()).getFullYear() + " Copyright (C) Brownlee Ferguson & Won Oh"
+    include scripts
+    block js
