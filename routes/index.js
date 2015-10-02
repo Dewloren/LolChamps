@@ -22,6 +22,13 @@ router.get('/champs', function(req, res, next) {
   });
 }); 
 
+router.get('/champions', function(req, res, next) {
+  riot.Static.getChampionList({ champData : "image", dataById : true }, function(err, data) {
+    var champs = _.values(data["data"]);
+    res.render('champions', { version: data.version, champs : champs });
+  });
+});
+
 router.get('/champ/:id', function(req, res, next) {
   riot.Static.getChampionById(req.params.id, { champData : "all" }, function(err, data) {
     res.send(data);
