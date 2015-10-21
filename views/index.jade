@@ -3,11 +3,12 @@ extends layout
 block content
   h1.center-align ChampSearch
   .row
-    .input-field.col.s10
-      input#champ-search(type="text" required placeholder="Search for Champions!")
-    .col.s2
-      button.btn.waves-effect.waves-light.btn-large(type="submit")
-        i.fa.fa-search  
+    form#searchForm
+      .input-field.col.s10
+        input#champ-search(type="text" required placeholder="Search for Champions!")
+      .col.s2
+        button.btn.waves-effect.waves-light.btn-large(type="submit")
+          i.fa.fa-search
   .row
     #rotationGallery
 block js

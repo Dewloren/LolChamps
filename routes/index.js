@@ -4,6 +4,8 @@ var riot = require('leagueapi');
 var _ = require('lodash');
 
 riot.init('733d89e4-e317-4f31-a176-cc802b262d70', 'na');
+
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
@@ -35,5 +37,13 @@ router.get('/champ/:id', function(req, res, next) {
   });
 });
 
+router.get('/pages/champ/:name', function(req, res, next) {
+  riot.Static.getChampionList({ champData : "all", dataById : false}, function(err, data) {
+    var name = req.params.name.replace(/\W/g, '');
+    var partials = data["data"][name];
+    partials.ver = data["version"];
+    res.render('championPage', partials);
+  });
+});
 
 module.exports = router;

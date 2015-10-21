@@ -27,3 +27,9 @@ $
             
   });
 
+$("#searchForm")
+  .submit(function(e) {
+    e.preventDefault();
+    location.replace("/pages/champ/" + $("#champ-search").val());
+  });
+  
