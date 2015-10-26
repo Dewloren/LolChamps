@@ -1,0 +1,101 @@
+doctype html
+html
+  head
+    title=name + " -- " + title + ver
+    link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css")
+  body
+    .container
+      nav.navbar.navbar-inverse.navbar-fixed-top
+        .container-fluid
+          .navbar-header
+            button.navbar-toggle.collapsed(type="button" data-toggle="collapse" data-target="navigation")
+              span.icon-bar
+              span.icon-bar
+              span.icon-bar
+          a.navbar-brand=name    
+          .collapse.navbar-collapse#navigation
+            ul.nav.navbar-nav
+              li
+                a#overview Overview
+              li
+                a#abilities Abilities
+              li
+                a#lore Lore
+              li
+                a#tips Tips
+    .modal.fade#skinModal(role="dialog")
+      .modal-dialog.modal-lg
+        .modal-content
+          .modal-header
+            button.close(type="button" data-dismiss="modal") &times;
+            h4.modal-title
+          .modal-body
+            img(width="100%")
+          .modal-footer
+            button.btn.btn-default(type="button" data-dismiss="modal") Close
+    .container(style="padding-top:100px")
+      #overview-container
+        .row
+          .col-md-3
+            .media
+              .media-left
+                img.media-object(src="https://ddragon.leagueoflegends.com/cdn/#{ver}/img/champion/#{key}.png")
+              .media-body
+                  h3=name
+                  h4=title
+          .col-md-6
+            .panel.panel-default
+              .panel-heading
+                h4 Abilities
+              ul.list-group
+                li.list-group-item
+                  .media
+                    .media-left
+                      img.media-object(src="http://ddragon.leagueoflegends.com/cdn/#{ver}/img/passive/#{passive.image.full}")
+                    .media-body
+                      strong Passive
+                      p #{passive.sanitizedDescription}
+                - for (var i = 0; i < spells.length; i++)
+                  li.list-group-item
+                    .media
+                    .media-left
+                      img.media-object(src="http://ddragon.leagueoflegends.com/cdn/#{ver}/img/spell/#{spells[i].image.full}")
+                    .media-body
+                      case i
+                        when 0
+                          strong Q
+                        when 1
+                          strong W
+                        when 2
+                          strong E
+                        when 3
+                          strong R (Ultimate)
+                      p #{passive.sanitizedDescription}
+          .col-md-3
+            #skinCarousel.carousel.slide(data-ride="carousel")
+              ol.carousel-indicators
+                - for (var i = 0; i < skins.length; i++)
+                  - if (i == 0)
+                    li(data-target="#skinCarousel" data-slide-to="#{i}" class="active")
+                  - else
+                    li(data-target="#skinCarousel" data-slide-to="#{i}")
+              .carousel-inner(role="listbox")
+                - for (var i = 0; i < skins.length; i++)
+                  - if (i == 0)
+                    .item.active.champCard
+                      img(src="//ddragon.leagueoflegends.com/cdn/img/champion/loading/#{key}_#{skins[i]['num']}.jpg")
+                      .carousel-caption
+                        h3=skins[i]['name']
+                  - else
+                    .item.champCard
+                      img(src="//ddragon.leagueoflegends.com/cdn/img/champion/loading/#{key}_#{skins[i]['num']}.jpg")
+                      .carousel-caption
+                        h3=skins[i]['name']
+              a.left.carousel-control(href="#skinCarousel" role="button" data-slide="prev")
+                span.glyphicon.glyphicon-chevron-left
+              a.right.carousel-control(href="#skinCarousel" role="button" data-slide="next")
+                span.glyphicon.glyphicon-chevron-right
+    script(src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.min.js")
+    script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js")
+    script(src="/js/champPage.js")
