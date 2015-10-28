@@ -1,8 +1,9 @@
 doctype html
 html
   head
-    title=name + " -- " + title + ver
+    title=name + " -- " + title
     link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css")
+    link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css")
   body
     .container
       nav.navbar.navbar-inverse.navbar-fixed-top
@@ -12,17 +13,17 @@ html
               span.icon-bar
               span.icon-bar
               span.icon-bar
-          a.navbar-brand=name    
+          a.navbar-brand(href="/")
+            i.fa.fa-home
           .collapse.navbar-collapse#navigation
-            ul.nav.navbar-nav
+            ul.nav.navbar-nav.navbar-left
               li
-                a#overview Overview
-              li
-                a#abilities Abilities
-              li
-                a#lore Lore
-              li
-                a#tips Tips
+                a=name
+            form.navbar-form.navbar-right#searchForm(role="search")
+              .form-group
+                input.form-control#champ-search(type="text" placeholder="Search Champions")
+                button.btn.btn-default
+                  i.fa.fa-search
     .modal.fade#skinModal(role="dialog")
       .modal-dialog.modal-lg
         .modal-content
@@ -70,7 +71,7 @@ html
                           strong E
                         when 3
                           strong R (Ultimate)
-                      p #{passive.sanitizedDescription}
+                      p #{spells[i].sanitizedDescription}
           .col-md-3
             #skinCarousel.carousel.slide(data-ride="carousel")
               ol.carousel-indicators
@@ -98,4 +99,6 @@ html
     script(src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js")
     script(src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.min.js")
     script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js")
     script(src="/js/champPage.js")
+    script(src="/js/search.js")
