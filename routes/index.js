@@ -40,7 +40,7 @@ router.get('/champ/:id', function(req, res, next) {
 router.get('/pages/champ/:name', function(req, res, next) {
   riot.Static.getChampionList({ champData : "all", dataById : false}, function(err, data) {
     var name = req.params.name.replace(/\W/g, '');
-    name = (name.length == 0) ? "" : name.substr(0,1).toUpperCase() + name.substr(1).toLowerCase();
+    name = (name.length == 0) ? "" : name.substr(0,1).toUpperCase() + (req.params.name.indexOf('\'') != -1 ? name.substr(1).toLowerCase() : name.substr(1));
     var partials = data["data"][name];
     partials.ver = data["version"];
     res.render('championPage', partials);
