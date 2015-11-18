@@ -12,6 +12,7 @@ $
       });
     });
     free.forEach(function(element) {
+      $("#rotationGallery a").attr("href", "/pages/champ/" + element.name);
       $("#rotationGallery").append(
         $("<div>").append(
           $("<h5>").html(element.name).addClass("center-align")
@@ -38,4 +39,7 @@ $
       slidesToScroll: 3,
     });
     $(".slick-arrow").css("background-color", "#1a237e").css("border-radius", "100%");
+    $(".slick-slide h5").each(function(elem) {
+      $(this).wrap($("<a>").attr("href", "/pages/champ/" + $(this).html()));
+    });
   });
